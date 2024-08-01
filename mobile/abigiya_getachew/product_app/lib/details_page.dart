@@ -1,0 +1,215 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+
+class DetailsPage extends StatelessWidget {
+   DetailsPage({super.key});
+  Color color = Colors.white;
+  Color textcolor = Colors.black;
+
+  List<Widget> _buildContainer(int count) {
+    List<Widget> container = List.generate(
+      count,
+      (int index) {
+        return SizeCard(index: index,);
+      },
+    );
+    return container;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Flexible(
+            child: Column(
+              children: [
+                Container(
+                  height: 200,
+                  child: Stack(
+                    children: [
+                      Container(
+                          width: double.infinity,
+                          child:
+                              Image.asset('images/p2.png', fit: BoxFit.fitWidth)),
+                      Positioned(
+                        top: 20,
+                        left: 20,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50)),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Color.fromRGBO(63, 81, 243, 1),
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Text(
+                            'Men\'s shoe',
+                            style: TextStyle(fontWeight: FontWeight.w200),
+                          ),
+                          Spacer(),
+                          Icon(Icons.star, color: Colors.yellow),
+                          Text(
+                            '(4.0)',
+                            style: TextStyle(fontWeight: FontWeight.w300),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Row(
+                        children: <Widget>[
+                          Text('Derby Leather',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 25,
+                              )),
+                          Spacer(),
+                          Text('\$120'),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Size:',
+                        style:
+                            TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        height: 50,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: _buildContainer(7),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'A derby leather shoe is a classic and versatile footwear option characterized by its open lacing system, the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.',
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      Row(
+                        children: [
+                          OutlinedButton(
+                            onPressed: () {
+                              debugPrint('Delete pressed');
+                            },
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Colors.red),
+                              minimumSize: Size(150, 45),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)),
+                            ),
+                            child: const Text(
+                              'Delete',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                          const Spacer(),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(150, 45),
+                              backgroundColor:
+                                  const Color.fromRGBO(63, 81, 243, 1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)),
+                            ),
+                            onPressed: () {
+                              debugPrint('Update Pressed');
+                            },
+                            child: const Text(
+                              'Update',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SizeCard extends StatefulWidget {
+   SizeCard({
+    super.key,
+   required this.index
+  });
+  int index;
+
+  @override
+  State<SizeCard> createState() => _SizeCardState();
+}
+
+class _SizeCardState extends State<SizeCard> {
+  Color color= Colors.white;
+  Color textcolor = Colors.black;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          if(color == Colors.white){
+            color = Color.fromRGBO(63, 81, 243, 1);
+            textcolor = Colors.white;
+
+          }else{
+            color = Colors.white;
+            textcolor = Colors.black;
+          }
+        });
+      },
+      child: Container(
+        width: 55,
+        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+        decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 5,
+              )
+            ]),
+        child: Center(
+          child: Text('${widget.index + 38}',style: TextStyle(
+            color: textcolor,
+          ),),
+        ),
+      ),
+    );
+  }
+}
