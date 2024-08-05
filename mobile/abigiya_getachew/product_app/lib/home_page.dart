@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:product_app/details_page.dart';
+import 'package:product_app/models/products.dart';
+import 'package:product_app/models/products_repository.dart';
 import 'package:product_app/search_page.dart';
 import 'package:product_app/update_page.dart';
 
@@ -16,6 +18,15 @@ class HomePage extends StatelessWidget {
         fontFamily: 'Poppins',
       ),
       home: const RootPage(),
+
+      // initialRoute: '/',
+      // routes: {
+      //   '/':(context) => const HomePage(),
+      //   '/SearchPage': (context) => const SearchPage(),
+      //   '/UpdatePage': (context) => UpdatePage(),
+      //   '/DetailsPage': (context) => DetailsPage(),
+
+      // },
     );
   }
 }
@@ -27,91 +38,99 @@ class RootPage extends StatefulWidget {
   State<RootPage> createState() => _RootPageState();
 }
 
+List<Product> products = ProductsRepository.getAll();
 List<Card> _buildListCard(int count, BuildContext context) {
   List<Card> cards = List.generate(count, (int index) {
+    final product = products[index];
     return Card(
       clipBehavior: Clip.antiAlias,
-      child: GestureDetector(
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-            color: Colors.white,
-          )),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DetailsPage()));
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Image.asset(
-                    'images/p2.png',
-                    fit: BoxFit.cover,
+      // child: GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(
+          color: Colors.white,
+        )),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailsPage(
+                  product: product,
+                ),
+              ),
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Image.asset(
+                  'images/${product.id}.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            product.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            product.price.toString() + '\$',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            product.category,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w100,
+                            ),
+                          ),
+                          Spacer(),
+                          Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                            size: 20,
+                          ),
+                          Text(
+                            '(4.0)',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w100,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Derby Leather Shoes',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              '\$120',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Men\'s shoe',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w100,
-                              ),
-                            ),
-                            Spacer(),
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: 20,
-                            ),
-                            Text(
-                              '(4.0)',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w100,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
+      // ),
     );
   });
   return cards;
@@ -129,7 +148,7 @@ class _RootPageState extends State<RootPage> {
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     height: 40,
                     width: 40,
                     decoration: BoxDecoration(
@@ -218,12 +237,21 @@ class _RootPageState extends State<RootPage> {
                       alignment:
                           Alignment.center, // Center the icon within the button
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchPage(),
-                          ),
-                        );
+                        Navigator.of(context).push(PageRouteBuilder(
+  pageBuilder: (context, animation, secondaryAnimation) => const SearchPage(),
+  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    const begin = Offset(1.0, 0.0);
+    const end = Offset.zero;
+    const curve = Curves.easeInOut;
+    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+    var offsetAnimation = animation.drive(tween);
+
+    return SlideTransition(
+      position: offsetAnimation,
+      child: child,
+    );
+  },
+));
                       },
                       icon: const Icon(
                         Icons.search,
@@ -236,7 +264,8 @@ class _RootPageState extends State<RootPage> {
               ),
               SizedBox(height: 10),
               Expanded(
-                child: ListView(children: _buildListCard(3, context)),
+                child: ListView(
+                    children: _buildListCard(products.length, context)),
               ),
             ],
           ),
@@ -248,11 +277,27 @@ class _RootPageState extends State<RootPage> {
               color: Colors.white,
             ),
             shape: CircleBorder(),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UpdatePage()));
+            onPressed: () async {
+              final Product? newProduct =
+                  await Navigator.pushNamed(context, '/UpdatePage') as Product?;
+
+              if (newProduct != null) {
+                setState(() {
+                  products.add(newProduct);
+                  print(products.length);
+                });
+              }
             }),
       ),
     );
   }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => SearchPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
 }

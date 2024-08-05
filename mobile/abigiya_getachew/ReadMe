@@ -1,0 +1,52 @@
+# Product App
+
+A Flutter application for managing products, including features for searching, adding, updating, and viewing product details.
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Navigation and Transitions](#navigation-and-transitions)
+- [Screens](#screens)
+  - [Home Page](#home-page)
+  - [Search Page](#search-page)
+  - [Update Page](#update-page)
+  - [Details Page](#details-page)
+- [Models](#models)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+1. Ensure you have Flutter installed on your machine. Follow the instructions [here](https://flutter.dev/docs/get-started/install) if you haven't already.
+2. Clone this repository:
+    ```bash
+    git clone https://github.com/yourusername/product_app.git
+    ```
+3. Navigate to the project directory:
+    ```bash
+    cd product_app
+    ```
+4. Get the dependencies:
+    ```bash
+    flutter pub get
+    ```
+
+## Usage
+
+To run the app on your local machine, use:
+```bash
+flutter run
+
+
+Project Structure
+
+lib/
+├── main.dart
+├── models/
+│   └── products.dart
+├── pages/
+│   ├── home_page.dart
+│   ├── search_page.dart
+│   ├── update_page.dart
+│   └── details_page.dart

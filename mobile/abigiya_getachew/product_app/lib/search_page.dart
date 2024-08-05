@@ -134,7 +134,17 @@ class _SearchPageState extends State<SearchPage> {
                         )),
                   ),
                 ),
-                Container(
+                
+                  GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context, 
+                  builder: (BuildContext context) {
+                    return  BottomSelect();
+                  },
+                  );
+              },
+              child: Container(
                   height: 40,
                   width: 40,
                   decoration: BoxDecoration(
@@ -142,15 +152,36 @@ class _SearchPageState extends State<SearchPage> {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Icon(Icons.filter_list, color: Colors.white),
+            ),
                 )
               ],
             ),
             Expanded(
               child: ListView(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.only(top:20),
                   children: _buildListCard(3)),
             ),
-            Container(
+            
+            
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BottomSelect extends StatefulWidget {
+  const BottomSelect({super.key});
+
+  @override
+  State<BottomSelect> createState() => _BottomSelectState();
+}
+
+class _BottomSelectState extends State<BottomSelect> {
+  @override
+  Widget build(BuildContext context) {
+    RangeValues range = RangeValues(15, 85);
+    return Container(
               height: 250,
               child: Padding(
                 padding: EdgeInsets.all(20),
@@ -204,10 +235,6 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
-            )
-          ],
-        ),
-      ),
-    );
+            );
   }
 }

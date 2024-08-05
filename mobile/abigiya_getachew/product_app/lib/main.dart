@@ -17,7 +17,15 @@ class Root extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes:{
+        '/':(context) => const RootPage(),
+        // '/SearchPage': (context) => const SearchPage(),
+        '/UpdatePage': (context) => const Parent(),
+        // '/DetailsPage': (context) => DetailsPage(),
+
+      },
+      // home: const RootPage(),
     );
   }
 }

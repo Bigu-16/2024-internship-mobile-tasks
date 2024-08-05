@@ -2,9 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:product_app/models/products.dart';
+
+// Route _createRoute() {
+//   return PageRouteBuilder(
+//     pageBuilder: (context,))
+// }
 
 class DetailsPage extends StatelessWidget {
-   DetailsPage({super.key});
+  final Product product;
+   DetailsPage({required this.product, super.key});
   Color color = Colors.white;
   Color textcolor = Colors.black;
 
@@ -17,6 +24,7 @@ class DetailsPage extends StatelessWidget {
     );
     return container;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +41,7 @@ class DetailsPage extends StatelessWidget {
                       Container(
                           width: double.infinity,
                           child:
-                              Image.asset('images/p2.png', fit: BoxFit.fitWidth)),
+                              Image.asset('images/${product.id}.jpg', fit: BoxFit.fitWidth)),
                       Positioned(
                         top: 20,
                         left: 20,
@@ -64,10 +72,10 @@ class DetailsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Row(
+                      Row(
                         children: [
                           Text(
-                            'Men\'s shoe',
+                            product.category,
                             style: TextStyle(fontWeight: FontWeight.w200),
                           ),
                           Spacer(),
@@ -81,15 +89,15 @@ class DetailsPage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Row(
+                      Row(
                         children: <Widget>[
-                          Text('Derby Leather',
+                          Text(product.name,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 25,
                               )),
                           Spacer(),
-                          Text('\$120'),
+                          Text(product.price.toString() + '\$'),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -107,8 +115,8 @@ class DetailsPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Text(
-                        'A derby leather shoe is a classic and versatile footwear option characterized by its open lacing system, the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.',
+                      Text(
+                        product.description,
                         style: TextStyle(
                           fontSize: 12,
                         ),
@@ -118,7 +126,7 @@ class DetailsPage extends StatelessWidget {
                         children: [
                           OutlinedButton(
                             onPressed: () {
-                              debugPrint('Delete pressed');
+                              
                             },
                             style: OutlinedButton.styleFrom(
                               side: BorderSide(color: Colors.red),
