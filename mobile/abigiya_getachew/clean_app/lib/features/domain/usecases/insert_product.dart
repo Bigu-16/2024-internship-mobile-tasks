@@ -3,12 +3,12 @@ import 'package:clean_app/features/domain/entities/product.dart';
 import 'package:clean_app/features/domain/repositories/product_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class AddProduct{
+class InsertProduct{
   final ProductRepository productRepository;
 
-  const AddProduct(this.productRepository);
+  const InsertProduct(this.productRepository);
 
   Future<Either<Failure,void>> call(Product product){
-    return productRepository.addProduct(product);
+    return productRepository.insertProduct(product);
   }
 }

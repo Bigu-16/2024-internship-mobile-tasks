@@ -103,17 +103,18 @@ class MockProductRepository extends _i1.Mock implements _i4.ProductRepository {
       ) as _i5.Future<_i2.Either<_i6.Failure, void>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, void>> addProduct(_i7.Product? product) =>
+  _i5.Future<_i2.Either<_i6.Failure, void>> insertProduct(
+          _i7.Product? product) =>
       (super.noSuchMethod(
         Invocation.method(
-          #addProduct,
+          #insertProduct,
           [product],
         ),
         returnValue: _i5.Future<_i2.Either<_i6.Failure, void>>.value(
             _FakeEither_0<_i6.Failure, void>(
           this,
           Invocation.method(
-            #addProduct,
+            #insertProduct,
             [product],
           ),
         )),

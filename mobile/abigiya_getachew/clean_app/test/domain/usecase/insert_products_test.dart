@@ -1,6 +1,6 @@
 import 'package:clean_app/core/error/failure.dart';
 import 'package:clean_app/features/domain/entities/product.dart';
-import 'package:clean_app/features/domain/usecases/add_product.dart';
+import 'package:clean_app/features/domain/usecases/insert_product.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -8,29 +8,29 @@ import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 Future<void> main() async {
-  late AddProduct addProduct;
+  late InsertProduct insertProduct;
   late MockProductRepository mockProductRepository;
 
   setUp((){
     mockProductRepository = MockProductRepository();
-    addProduct = AddProduct(mockProductRepository);
+    insertProduct = InsertProduct(mockProductRepository);
   });
 
-  const testAddProduct = Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet');
+  const testAddProduct = Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
 
 
 
   test('should not return but should add to the list', () async {
     // Arrange
-    when(mockProductRepository.addProduct(testAddProduct))
+    when(mockProductRepository.insertProduct(testAddProduct))
       .thenAnswer((_) async => Right(unit));
 
     // Act
-    final result = await addProduct(testAddProduct);
+    final result = await insertProduct(testAddProduct);
 
     // Assert
     expect(result, Right(unit));
-    verify(mockProductRepository.addProduct(testAddProduct)).called(1);
+    verify(mockProductRepository.insertProduct(testAddProduct)).called(1);
     verifyNoMoreInteractions(mockProductRepository);
   });
 
@@ -38,10 +38,10 @@ Future<void> main() async {
 
   test('error adding prpoduct', ()async{
     when(
-      mockProductRepository.addProduct(testAddProduct)
+      mockProductRepository.insertProduct(testAddProduct)
     ).thenAnswer((_) async => Left(testFailure));
 
-    final result = await addProduct(testAddProduct);
+    final result = await insertProduct(testAddProduct);
 
     expect(result, Left(testFailure));
   });

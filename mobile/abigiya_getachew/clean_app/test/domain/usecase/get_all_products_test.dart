@@ -17,9 +17,9 @@ void main(){
   });
 
   List<Product> testProductList = <Product>[
-    const Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet'),
-    const Product(id: 2, name: 'tie', category: 'cloth', price: 30, rating: 4.0, description: 'mejid said it is used for tying your neck'),
-    const Product(id: 3, name: 'shorts', category: 'cloth', price: 40, rating: 4.0, description: 'mejid said it is used for covering your lower body')
+    const Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet',imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800'),
+    const Product(id: 2, name: 'tie', category: 'cloth', price: 30, rating: 4.0, description: 'mejid said it is used for tying your neck', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800'),
+    const Product(id: 3, name: 'shorts', category: 'cloth', price: 40, rating: 4.0, description: 'mejid said it is used for covering your lower body', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800')
   ];
 
   test('should return list of products', ()async{

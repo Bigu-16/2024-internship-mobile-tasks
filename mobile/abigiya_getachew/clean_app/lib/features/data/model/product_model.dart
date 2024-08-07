@@ -8,11 +8,13 @@ class ProductModel extends Product {
     required double price,
     required double rating,
     required String description,
+    required String imageUrl,
   }) : super(
             id: id,
             name: name,
             category: category,
             price: price,
             rating: rating,
-            description: description);
+            description: description,
+            imageUrl: imageUrl);
 }
