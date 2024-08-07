@@ -1,6 +1,6 @@
 import 'package:clean_app/core/error/failure.dart';
-import 'package:clean_app/features/domain/entities/product.dart';
-import 'package:clean_app/features/domain/repositories/product_repository.dart';
+import 'package:clean_app/features/ecommerce/domain/entities/product.dart';
+import 'package:clean_app/features/ecommerce/domain/repositories/product_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class GetAllProducts{

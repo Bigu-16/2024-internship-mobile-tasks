@@ -1,6 +1,6 @@
 import 'package:clean_app/core/error/failure.dart';
-import 'package:clean_app/features/domain/entities/product.dart';
-import 'package:clean_app/features/domain/usecases/insert_product.dart';
+import 'package:clean_app/features/ecommerce/domain/entities/product.dart';
+import 'package:clean_app/features/ecommerce/domain/usecases/insert_product.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -16,7 +16,7 @@ Future<void> main() async {
     insertProduct = InsertProduct(mockProductRepository);
   });
 
-  const testAddProduct = Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
+  const testAddProduct = Product(id: '1', name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
 
 
 

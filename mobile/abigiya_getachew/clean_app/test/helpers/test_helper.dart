@@ -1,4 +1,4 @@
-import 'package:clean_app/features/domain/repositories/product_repository.dart';
+import 'package:clean_app/features/ecommerce/domain/repositories/product_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 

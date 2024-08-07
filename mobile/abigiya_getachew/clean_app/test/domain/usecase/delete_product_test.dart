@@ -1,5 +1,5 @@
 import 'package:clean_app/core/error/failure.dart';
-import 'package:clean_app/features/domain/usecases/delete_product.dart';
+import 'package:clean_app/features/ecommerce/domain/usecases/delete_product.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -16,7 +16,7 @@ void main(){
   });
 
   // const testDeleteProduct = Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet');
-  const testId = 1;
+  const testId = '1';
 
   test('should delete from the list', () async{
     when(mockProductRepository.deleteProduct(testId)

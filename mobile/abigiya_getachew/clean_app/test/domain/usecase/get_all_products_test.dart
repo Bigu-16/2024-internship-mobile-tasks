@@ -1,6 +1,6 @@
 import 'package:clean_app/core/error/failure.dart';
-import 'package:clean_app/features/domain/entities/product.dart';
-import 'package:clean_app/features/domain/usecases/get_all_products.dart';
+import 'package:clean_app/features/ecommerce/domain/entities/product.dart';
+import 'package:clean_app/features/ecommerce/domain/usecases/get_all_products.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -17,9 +17,9 @@ void main(){
   });
 
   List<Product> testProductList = <Product>[
-    const Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet',imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800'),
-    const Product(id: 2, name: 'tie', category: 'cloth', price: 30, rating: 4.0, description: 'mejid said it is used for tying your neck', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800'),
-    const Product(id: 3, name: 'shorts', category: 'cloth', price: 40, rating: 4.0, description: 'mejid said it is used for covering your lower body', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800')
+    const Product(id: '1', name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet',imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800'),
+    const Product(id: '2', name: 'tie', category: 'cloth', price: 30, rating: 4.0, description: 'mejid said it is used for tying your neck', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800'),
+    const Product(id: '3', name: 'shorts', category: 'cloth', price: 40, rating: 4.0, description: 'mejid said it is used for covering your lower body', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800')
   ];
 
   test('should return list of products', ()async{

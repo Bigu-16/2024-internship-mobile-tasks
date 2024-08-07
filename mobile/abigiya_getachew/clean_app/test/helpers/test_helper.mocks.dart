@@ -8,8 +8,9 @@ import 'dart:convert' as _i8;
 import 'dart:typed_data' as _i10;
 
 import 'package:clean_app/core/error/failure.dart' as _i6;
-import 'package:clean_app/features/domain/entities/product.dart' as _i7;
-import 'package:clean_app/features/domain/repositories/product_repository.dart'
+import 'package:clean_app/features/ecommerce/domain/entities/product.dart'
+    as _i7;
+import 'package:clean_app/features/ecommerce/domain/repositories/product_repository.dart'
     as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:http/http.dart' as _i3;
@@ -69,7 +70,7 @@ class MockProductRepository extends _i1.Mock implements _i4.ProductRepository {
   }
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.Product>> getOneProduct(int? id) =>
+  _i5.Future<_i2.Either<_i6.Failure, _i7.Product>> getOneProduct(String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getOneProduct,
@@ -86,7 +87,7 @@ class MockProductRepository extends _i1.Mock implements _i4.ProductRepository {
       ) as _i5.Future<_i2.Either<_i6.Failure, _i7.Product>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, void>> deleteProduct(int? id) =>
+  _i5.Future<_i2.Either<_i6.Failure, void>> deleteProduct(String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteProduct,
