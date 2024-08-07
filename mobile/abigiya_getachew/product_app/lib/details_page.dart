@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:product_app/models/products.dart';
+import 'models/products.dart';
 
 // Route _createRoute() {
 //   return PageRouteBuilder(
@@ -34,11 +31,11 @@ class DetailsPage extends StatelessWidget {
           child: Flexible(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: 200,
                   child: Stack(
                     children: [
-                      Container(
+                      SizedBox(
                           width: double.infinity,
                           child:
                               Image.asset('images/${product.id}.jpg', fit: BoxFit.fitWidth)),
@@ -56,7 +53,7 @@ class DetailsPage extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back_ios_new,
                               color: Color.fromRGBO(63, 81, 243, 1),
                               size: 15,
@@ -76,11 +73,11 @@ class DetailsPage extends StatelessWidget {
                         children: [
                           Text(
                             product.category,
-                            style: TextStyle(fontWeight: FontWeight.w200),
+                            style: const TextStyle(fontWeight: FontWeight.w200),
                           ),
-                          Spacer(),
-                          Icon(Icons.star, color: Colors.yellow),
-                          Text(
+                          const Spacer(),
+                          const Icon(Icons.star, color: Colors.yellow),
+                          const Text(
                             '(4.0)',
                             style: TextStyle(fontWeight: FontWeight.w300),
                           ),
@@ -92,11 +89,11 @@ class DetailsPage extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Text(product.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 25,
                               )),
-                          Spacer(),
+                          const Spacer(),
                           Text(product.price.toString() + '\$'),
                         ],
                       ),
@@ -106,7 +103,7 @@ class DetailsPage extends StatelessWidget {
                         style:
                             TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       SizedBox(
                         height: 50,
                         child: ListView(
@@ -117,7 +114,7 @@ class DetailsPage extends StatelessWidget {
                       const SizedBox(height: 20),
                       Text(
                         product.description,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                         ),
                       ),
@@ -129,7 +126,7 @@ class DetailsPage extends StatelessWidget {
                               
                             },
                             style: OutlinedButton.styleFrom(
-                              side: BorderSide(color: Colors.red),
+                              side: const BorderSide(color: Colors.red),
                               minimumSize: Size(150, 45),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),

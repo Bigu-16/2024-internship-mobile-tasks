@@ -1,0 +1,45 @@
+import 'package:clean_app/core/error/failure.dart';
+import 'package:clean_app/features/domain/entities/product.dart';
+import 'package:clean_app/features/domain/usecases/get_all_products.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+import '../../helpers/test_helper.mocks.dart';
+
+void main(){
+  late GetAllProducts getAllProducts;
+  late MockProductRepository mockProductRepository;
+
+  setUp((){
+    mockProductRepository = MockProductRepository();
+    getAllProducts = GetAllProducts(mockProductRepository);
+  });
+
+  List<Product> testProductList = <Product>[
+    const Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet'),
+    const Product(id: 2, name: 'tie', category: 'cloth', price: 30, rating: 4.0, description: 'mejid said it is used for tying your neck'),
+    const Product(id: 3, name: 'shorts', category: 'cloth', price: 40, rating: 4.0, description: 'mejid said it is used for covering your lower body')
+  ];
+
+  test('should return list of products', ()async{
+    when(
+      mockProductRepository.getAllProducts()
+      ).thenAnswer((_) async => Right(testProductList));
+
+      final result = await getAllProducts();
+
+      expect(result, Right(testProductList));
+  });
+
+  const testFailure = Failure('error');
+  test('should return error', ()async{
+    when(
+      mockProductRepository.getAllProducts()
+    ).thenAnswer((_) async => Left(testFailure));
+
+    final result = await getAllProducts();
+
+    expect(result, Left(testFailure));
+  });
+}

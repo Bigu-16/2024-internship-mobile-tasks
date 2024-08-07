@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:product_app/details_page.dart';
-import 'package:product_app/models/products.dart';
-import 'package:product_app/models/products_repository.dart';
-import 'package:product_app/search_page.dart';
-import 'package:product_app/update_page.dart';
+
+import 'details_page.dart';
+import 'models/products.dart';
+import 'models/products_repository.dart';
+import 'search_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -76,14 +76,14 @@ List<Card> _buildListCard(int count, BuildContext context) {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     children: <Widget>[
                       Row(
                         children: <Widget>[
                           Text(
                             product.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
                             ),
@@ -91,7 +91,7 @@ List<Card> _buildListCard(int count, BuildContext context) {
                           Spacer(),
                           Text(
                             product.price.toString() + '\$',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             ),
@@ -102,18 +102,18 @@ List<Card> _buildListCard(int count, BuildContext context) {
                         children: <Widget>[
                           Text(
                             product.category,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w100,
                             ),
                           ),
                           Spacer(),
-                          Icon(
+                          const Icon(
                             Icons.star,
                             color: Colors.yellow,
                             size: 20,
                           ),
-                          Text(
+                          const Text(
                             '(4.0)',
                             style: TextStyle(
                               fontSize: 12,
@@ -156,7 +156,7 @@ class _RootPageState extends State<RootPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -185,7 +185,7 @@ class _RootPageState extends State<RootPage> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     alignment: Alignment.center,
                     width: 30,
@@ -210,7 +210,7 @@ class _RootPageState extends State<RootPage> {
                   )
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -262,7 +262,7 @@ class _RootPageState extends State<RootPage> {
                   )
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Expanded(
                 child: ListView(
                     children: _buildListCard(products.length, context)),
@@ -272,11 +272,7 @@ class _RootPageState extends State<RootPage> {
         ),
         floatingActionButton: FloatingActionButton(
             backgroundColor: Color.fromRGBO(63, 81, 243, 1),
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-            shape: CircleBorder(),
+            shape: const CircleBorder(),
             onPressed: () async {
               final Product? newProduct =
                   await Navigator.pushNamed(context, '/UpdatePage') as Product?;
@@ -287,7 +283,11 @@ class _RootPageState extends State<RootPage> {
                   print(products.length);
                 });
               }
-            }),
+            },
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            )),
       ),
     );
   }

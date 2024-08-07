@@ -8,7 +8,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  RangeValues range = RangeValues(15, 85);
+  RangeValues range = const RangeValues(15, 85);
   List<Card> _buildListCard(int count) {
     List<Card> cards = List.generate(count, (int index) {
       return Card(
@@ -24,7 +24,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                     color: Colors.white,
                   ),
               child: const Padding(
@@ -180,7 +180,7 @@ class BottomSelect extends StatefulWidget {
 class _BottomSelectState extends State<BottomSelect> {
   @override
   Widget build(BuildContext context) {
-    RangeValues range = RangeValues(15, 85);
+    RangeValues range = const RangeValues(15, 85);
     return Container(
               height: 250,
               child: Padding(
@@ -189,7 +189,7 @@ class _BottomSelectState extends State<BottomSelect> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Category'),
+                    const Text('Category'),
                     Container(
                       height: 40,
                       width: 350,
@@ -198,7 +198,7 @@ class _BottomSelectState extends State<BottomSelect> {
                             color: Color.fromARGB(255, 232, 232, 232),
                           ),
                           borderRadius: BorderRadius.circular(10)),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
                         ),
@@ -227,7 +227,7 @@ class _BottomSelectState extends State<BottomSelect> {
                       onPressed: () {
                         debugPrint('Add Pressed');
                       },
-                      child: Text(
+                      child: const Text(
                         'APPLY',
                         style: TextStyle(color: Colors.white),
                       ),

@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Upload Image Example')),
-        body: Parent(),
+        appBar: AppBar(title: const Text('Upload Image Example')),
+        body: const Parent(),
       ),
     );
   }
@@ -74,7 +74,7 @@ class UpdatePage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
           ),
@@ -126,36 +126,36 @@ class UpdatePage extends StatelessWidget {
                   child: TextField(
                     
                     controller: nameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                     ),
                   ),
                 ),
-                SizedBox(height: 6),
-                Text('Category'),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
+                const Text('Category'),
+                const SizedBox(height: 6),
                 Container(
                   decoration: BoxDecoration(
                       color: Color.fromARGB(255, 243, 242, 242),
                       borderRadius: BorderRadius.circular(4)),
                   child: TextField(
                     controller: categoryController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                     ),
                   ),
                 ),
-                SizedBox(height: 6),
-                Text('Price'),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
+                const Text('Price'),
+                const SizedBox(height: 6),
                 Container(
                   decoration: BoxDecoration(
                       color: Color.fromARGB(255, 243, 242, 242),
                       borderRadius: BorderRadius.circular(4)),
                   child: TextField(
                     controller: priceController,
-                    keyboardType: TextInputType.numberWithOptions(signed: false),
-                    decoration: InputDecoration(
+                    keyboardType: const TextInputType.numberWithOptions(signed: false),
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         suffixIcon: Icon(
                           Icons.attach_money,
@@ -163,9 +163,9 @@ class UpdatePage extends StatelessWidget {
                         )),
                   ),
                 ),
-                SizedBox(height: 6),
-                Text('Description'),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
+                const Text('Description'),
+                const SizedBox(height: 6),
                 Container(
                   height: 140,
                   decoration: BoxDecoration(
@@ -173,15 +173,15 @@ class UpdatePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4)),
                   child: TextField(
                     controller: descriptionController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(500, 45),
+                    minimumSize: const Size(500, 45),
                     backgroundColor: const Color.fromRGBO(63, 81, 243, 1),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4)),
@@ -197,22 +197,22 @@ class UpdatePage extends StatelessWidget {
                     );
                     Navigator.pop(context, updatedProduct);
                   },
-                  child: Text(
+                  child: const Text(
                     'ADD',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 OutlinedButton(
                   onPressed: () {
                     debugPrint('Delete pressed');
                   },
                   style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: Colors.red),
-                      minimumSize: Size(500, 45),
+                      side: const BorderSide(color: Colors.red),
+                      minimumSize: const Size(500, 45),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4))),
-                  child: Text(
+                  child: const Text(
                     'Delete',
                     style: TextStyle(color: Colors.red),
                   ),
@@ -268,7 +268,7 @@ class _UploadImageState extends State<UploadImage> {
                   Image.file(_image!),
                 ElevatedButton(
                   onPressed: getImageGallery,
-                  child: Text('Pick Image from Gallery'),
+                  child: const Text('Pick Image from Gallery'),
                 ),
               ],
             ),
