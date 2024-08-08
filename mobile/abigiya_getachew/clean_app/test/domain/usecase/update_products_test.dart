@@ -16,7 +16,7 @@ Future<void> main() async {
     updateProduct = UpdateProduct(mockProductRepository);
   });
 
-  const testUpdate = Product(id: '1', name: 'shoe', category: 'leather', price: 40, rating: 4.0, description: 'quality shoe', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
+  const testUpdate = Product(id: '1', name: 'shoe', price: 40, description: 'quality shoe', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
 
   test('should update product on the list', ()async{
     when(

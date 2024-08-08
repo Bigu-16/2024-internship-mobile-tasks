@@ -10,9 +10,7 @@ void main(){
 
   const testProductModel = ProductModel(
     id: '1', name: 'shoe', 
-    category: 'leather', 
     price: 3.0, 
-    rating: 4.0, 
     description: 'brand new ethiopian leather shoe', 
     imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
   test('should be a subclass of a product entity', ()async{
@@ -38,9 +36,7 @@ void main(){
     final expectedJsonMap = {
       'id': '1',
       'name': 'shoe',
-      'category': 'leather',
       'price': 3.0,
-      'rating': 4.0,
       'description': 'brand new ethiopian leather shoe',
       'imageUrl': 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800',
     };

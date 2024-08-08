@@ -16,7 +16,7 @@ Future<void> main() async {
     insertProduct = InsertProduct(mockProductRepository);
   });
 
-  const testAddProduct = Product(id: '1', name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
+  const testAddProduct = Product(id: '1', name: 'shoe', price: 50, description: 'mejid said it is used for covering your feet', imageUrl: 'https://images.pexels.com/photos/256198/pexels-photo-256198.jpeg?auto=compress&cs=tinysrgb&w=800');
 
 
 

@@ -15,7 +15,6 @@ void main(){
     deleteProduct = DeleteProduct(mockProductRepository); 
   });
 
-  // const testDeleteProduct = Product(id: 1, name: 'shoe', category: 'leather', price: 50, rating: 4.0, description: 'mejid said it is used for covering your feet');
   const testId = '1';
 
   test('should delete from the list', () async{
