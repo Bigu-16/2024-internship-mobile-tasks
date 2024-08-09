@@ -21,6 +21,9 @@ class ProductModel extends Product {
       description: json['description'] ?? '',
       imageUrl: json['imageUrl'] ?? '');
 
+  static List<ProductModel> fromJsonList (List<dynamic> jsonList){
+    return jsonList.map((json) => ProductModel.fromJson(json)).toList();}
+
   Map<String, dynamic> toJson() => {
     'name': name,
     'price': price,
