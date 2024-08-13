@@ -48,7 +48,7 @@ void main() {
           http.Response(
               readJson('helpers/dummy_data/dummy_product_response.json'), 200));
 
-      final result = await productRemoteDataSourceImpl.getAllProduct();
+      final result = await productRemoteDataSourceImpl.getAllProducts();
 
       expect(result, isA<ProductModel>());
     });
@@ -57,7 +57,7 @@ void main() {
       when(mockHttpClient.get(Uri.parse(Urls.baseUrl)))
           .thenAnswer((_) async => http.Response('Not found', 404));
 
-      final result = productRemoteDataSourceImpl.getAllProduct;
+      final result = productRemoteDataSourceImpl.getAllProducts;
 
       expect(() async => result(), throwsA(isA<ServerException>()));
     });

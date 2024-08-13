@@ -21,8 +21,12 @@ class ProductModel extends Product {
       description: json['description'] ?? '',
       imageUrl: json['imageUrl'] ?? '');
 
-  static List<ProductModel> fromJsonList (List<dynamic> jsonList){
-    return jsonList.map((json) => ProductModel.fromJson(json)).toList();}
+  // static List<ProductModel> fromJsonList (List<dynamic> jsonList){
+  //   return jsonList.map((json) => ProductModel.fromJson(json)).toList();}
+
+    static List<ProductModel> listFromJson(List<dynamic> jsonList) {
+    return jsonList.map((json) => ProductModel.fromJson(json as Map<String, dynamic>)).toList();
+  }
 
   Map<String, dynamic> toJson() => {
     'name': name,
@@ -30,4 +34,16 @@ class ProductModel extends Product {
     'description': description,
     'imageUrl': imageUrl,
   };
+
+  Product toEntity() => Product(id: id, name: name, price: price, description: description, imageUrl: imageUrl);
+  ProductModel toModel() {
+  return ProductModel(
+    id: id,
+    name: name,
+    price: price, 
+    description: description, 
+    imageUrl: imageUrl,
+  );
+}
+
 }
