@@ -17,18 +17,18 @@ import 'package:http/http.dart' as http;
 
 class ProductRepositoryImpl extends ProductRepository{
   late final ProductRemoteDataSource productRemoteDataSource;
-  late final NetworkInfoImpl networkInfoImpl;
+  late final NetworkInfo networkInfo;
   late final ProductLocalDataSource productLocalDatasource;
   ProductRepositoryImpl({
     required this.productRemoteDataSource,
-    required this.networkInfoImpl,
+    required this.networkInfo,
     required this.productLocalDatasource
     });
 
   @override
   Future<Either<Failure, Product>> getOneProduct(String id) async {
 
-    if (await networkInfoImpl.isConnected){
+    if (await networkInfo.isConnected){
     try{
       final result = await productRemoteDataSource.getOneProduct(id);
       return Right(result.toEntity());
@@ -46,7 +46,7 @@ class ProductRepositoryImpl extends ProductRepository{
 
   @override
 Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
- if (await networkInfoImpl.isConnected){
+ if (await networkInfo.isConnected){
    try {
     final result = await productRemoteDataSource.getAllProducts();
     // Convert List<ProductModel> to List<Product>
@@ -67,7 +67,7 @@ Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
   
   @override
   Future<Either<Failure, ProductModel>> insertProduct(ProductModel newProduct) async {
-    if (await networkInfoImpl.isConnected){
+    if (await networkInfo.isConnected){
       try {
       final product = await productRemoteDataSource.insertProduct(newProduct);
       return Right(product);
@@ -83,7 +83,7 @@ Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
   
   @override
   Future<Either<Failure,Product>> updateProduct(ProductModel product) async{
-    if(await networkInfoImpl.isConnected){
+    if(await networkInfo.isConnected){
       try {
     var result = await productRemoteDataSource.updateProduct(product);
     return(Right(result));
@@ -100,7 +100,7 @@ Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
   
   @override
   Future<Either<Failure,String>> deleteProduct(String id) async{
-    if(await networkInfoImpl.isConnected){
+    if(await networkInfo.isConnected){
       try {
     var result = await productRemoteDataSource.deleteProduct(id);
     String ans = 'deleted';
@@ -117,7 +117,7 @@ Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
 }
 }
 // Future<void> main() async {
-//   // ProductRepositoryImpl imp = ProductRepositoryImpl(productRemoteDataSource: productRemoteDataSource, networkInfoImpl: networkInfoImpl, productLocalDatasource: productLocalDatasource);
+//   // ProductRepositoryImpl imp = ProductRepositoryImpl(productRemoteDataSource: productRemoteDataSource, networkInfo: networkInfo, productLocalDatasource: productLocalDatasource);
 
 //   WidgetsFlutterBinding.ensureInitialized();
 
@@ -134,7 +134,7 @@ Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
 //   // Create the repository instance
 //   final productRepository = ProductRepositoryImpl(
 //     productRemoteDataSource: productRemoteDataSource,
-//     networkInfoImpl: networkInfo,
+//     networkInfo: networkInfo,
 //     productLocalDatasource: productLocalDataSource,
 //   );
 

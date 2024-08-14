@@ -1,7 +1,11 @@
-import 'package:equatable/equatable.dart';
+import 'package:clean_app/features/ecommerce/domain/entities/product.dart';
+import 'package:dartz/dartz.dart';
 
-class Product extends Equatable{
-  const Product(
+class AddorUpdateEvent{}
+
+class AddData extends AddorUpdateEvent{
+
+  AddData(
     {
       required this.id,
       required this.name,
@@ -20,15 +24,5 @@ class Product extends Equatable{
   final String imageUrl;
   final String category;
   final double rating;
-
-  @override
-  List<Object?> get props => [
-    id,
-    name,
-    price,
-    description,
-    imageUrl,
-    category,
-    rating,
-  ];
 }
+class UpdateData extends AddorUpdateEvent{}

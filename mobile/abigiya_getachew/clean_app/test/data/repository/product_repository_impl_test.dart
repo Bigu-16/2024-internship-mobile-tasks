@@ -25,7 +25,7 @@ void main() {
     
     productRepositoryImpl = ProductRepositoryImpl(
       productRemoteDataSource: mockProductRemoteDataSource,
-      networkInfoImpl: NetworkInfoImpl(InternetConnectionChecker()),
+      networkInfo: NetworkInfoImpl(InternetConnectionChecker()),
       productLocalDatasource: ProductLocalDatasourceImp(sharedPreferences: mockSharedPreferences),
     );
   });
