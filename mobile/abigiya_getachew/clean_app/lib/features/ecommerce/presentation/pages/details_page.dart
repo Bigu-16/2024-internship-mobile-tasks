@@ -1,4 +1,5 @@
 import 'package:clean_app/features/ecommerce/domain/entities/product.dart';
+import 'package:clean_app/features/ecommerce/presentation/pages/update_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -143,7 +144,9 @@ class DetailsPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(4)),
                             ),
                             onPressed: () {
-                              debugPrint('Update Pressed');
+                              Navigator.push(context, 
+                              MaterialPageRoute(builder: (context)=> UpdatePage(product: product))
+                              );
                             },
                             child: const Text(
                               'Update',

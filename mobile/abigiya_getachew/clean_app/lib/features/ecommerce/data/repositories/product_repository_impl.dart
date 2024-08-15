@@ -66,17 +66,17 @@ Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
 
   
   @override
-  Future<Either<Failure, ProductModel>> insertProduct(ProductModel newProduct) async {
+  Future<Either<Failure, ProductModel>> insertProduct(ProductModel product) async {
     if (await networkInfo.isConnected){
       try {
-      final product = await productRemoteDataSource.insertProduct(newProduct);
-      return Right(product);
+      final result = await productRemoteDataSource.insertProduct(product);
+      return Right(result);
     } catch (error) {
       print("$error error");
       return Left(ServerFailure("an error occured"));
     }
     }else{
-      final result = await productLocalDatasource.cacheProduct(newProduct);
+      final result = await productLocalDatasource.cacheProduct(product);
       return Right(result);
     }
   }

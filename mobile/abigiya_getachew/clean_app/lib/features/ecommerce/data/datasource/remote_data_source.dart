@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:clean_app/core/constants/constants.dart';
 import 'package:clean_app/core/error/exception.dart';
+import 'package:clean_app/core/error/failure.dart';
 import 'package:clean_app/features/ecommerce/data/model/product_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -34,7 +35,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource{
   }
   @override
   Future<List<ProductModel>> getAllProducts() async{
-    final response = 
+    try{final response = 
     await client.get(Uri.parse(Urls.baseUrl));
 
     if(response.statusCode == 200){
@@ -43,6 +44,8 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource{
       return ProductModel.listFromJson(jsonList["data"]);    } 
     else{
       throw ServerException('Failed to load product');
+    }} catch(e){
+      throw ConnectionFailure('Network error');
     }
   }
 
@@ -60,9 +63,9 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource{
     // request.fields['name'] = newProduct.name;
     // request.fields['price'] = newProduct.price.toString();
     // request.fields['description'] = newProduct.description;
-    request.fields['name'] = 'new name';
-    request.fields['price'] = '100';
-    request.fields['description'] = 'new description';
+    request.fields['name'] = newProduct.name;
+    request.fields['price'] = newProduct.price.toString();
+    request.fields['description'] = newProduct.description;
   
     var response = await client.send(request);
       
@@ -80,17 +83,26 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource{
     }
   }
 
-
   @override
   Future<ProductModel> updateProduct(ProductModel product) async{
-    final response = 
-    await client.put(Uri.parse(Urls.getProductById(product.id)), body: product.toJson());
+    try{
+      final productJson = json.encode(product.toJson());
+      final id = product.id;
+      final getProd = await client.get(Uri.parse(Urls.baseUrl + '/${product.id}'));
+      
+      final response = 
+    await client.put(
+      Uri.parse(Urls.baseUrl + '/${product.id}'),
+      headers: {'Content-Type': 'application/json'} ,
+      body: productJson);
 
     if (response.statusCode == 200){
-      return ProductModel.fromJson(json.decode(response.body));
+      return ProductModel.fromJson(json.decode(response.body)["data"]);
     }
     else{
       throw ServerException('Failed to update product');
+    }}catch(e){
+      throw ServerException('failed ');
     }
   }
 

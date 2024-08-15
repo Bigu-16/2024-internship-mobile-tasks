@@ -32,7 +32,6 @@ class ProductModel extends Product {
     'name': name,
     'price': price,
     'description': description,
-    'imageUrl': imageUrl,
   };
 
   Product toEntity() => Product(id: id, name: name, price: price, description: description, imageUrl: imageUrl);

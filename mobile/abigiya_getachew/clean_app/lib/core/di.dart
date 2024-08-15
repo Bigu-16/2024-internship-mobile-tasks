@@ -21,6 +21,7 @@ Future<void> setup() async {
   var client = http.Client();
   var internetChechker = InternetConnectionChecker();
   var sharedPreferences = await SharedPreferences.getInstance();
+  
   getIt.registerSingleton<InternetConnectionChecker>(internetChechker);
   getIt.registerFactory<NetworkInfo>(()=>NetworkInfoImpl(internetChechker));
   getIt.registerLazySingleton<ProductRemoteDataSource>(()=>
@@ -40,5 +41,5 @@ Future<void> setup() async {
   getIt.registerLazySingleton<DeleteProduct>(()=>DeleteProduct(getIt()));
   getIt.registerLazySingleton<HomePageBloc>(()=>HomePageBloc(getAllProducts: getIt()));
   getIt.registerLazySingleton<AddBloc>(()=>AddBloc(insertProduct: getIt()));
-  getIt.registerLazySingleton<UpdateBloc>(()=>UpdateBloc());
+  getIt.registerLazySingleton<UpdateBloc>(()=>UpdateBloc(updateProduct: getIt()));
 }

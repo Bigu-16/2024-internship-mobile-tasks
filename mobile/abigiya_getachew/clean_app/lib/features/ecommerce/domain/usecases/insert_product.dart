@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart';
 class InsertProduct{
   final ProductRepository productRepository;
 
-  const InsertProduct({required ProductRepositoryImpl this.productRepository});
+  const InsertProduct({required  this.productRepository});
 
   Future<Either<Failure,Product>> call(ProductModel product) async{
     return await productRepository.insertProduct(product);

@@ -41,7 +41,6 @@ class _RootPageState extends State<RootPage> {
           }else if (state is FetchFailure){
             return (Text('Failed to fetch'));
           }else if (state is FetchSuccess){
-          
 
             return Padding(
                   padding: const EdgeInsets.all(20),
