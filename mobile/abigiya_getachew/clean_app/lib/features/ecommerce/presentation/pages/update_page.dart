@@ -2,10 +2,16 @@ import 'package:clean_app/features/ecommerce/domain/entities/product.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/add_and_update/add_and_update_bloc.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/add_and_update/add_and_update_event.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/add_and_update/add_and_update_state.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_bloc.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_event.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_state.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_bloc.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_event.dart';
+import 'package:clean_app/features/ecommerce/presentation/pages/home_page.dart';
 import 'package:clean_app/features/ecommerce/presentation/widgets/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart'; 
+import 'package:uuid/uuid.dart';
 
 class UpdatePage extends StatefulWidget {
   final Product? product;
@@ -27,7 +33,7 @@ class _UpdatePageState extends State<UpdatePage> {
     // final id = widget.product != null ? widget.product!.id : Uuid().v4();
 
     if (widget.product != null) {
-      context.read<UpdateBloc>().add(UpdateData(
+      context.read<UpdateBloc>().add(AddData(
             id: widget.product!.id,
             name: name,
             category: category,
@@ -45,6 +51,8 @@ class _UpdatePageState extends State<UpdatePage> {
             imageUrl: imageUrl,
           ));
     }
+
+     
   }
 
   final TextEditingController nameController = TextEditingController();
@@ -54,9 +62,9 @@ class _UpdatePageState extends State<UpdatePage> {
   String? _imageUrl;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    if (widget.product != null){
+    if (widget.product != null) {
       final product = widget.product!;
       nameController.text = product.name;
       categoryController.text = product.category;
@@ -74,7 +82,8 @@ class _UpdatePageState extends State<UpdatePage> {
         toolbarHeight: 30,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
           },
           icon: Icon(
             Icons.arrow_back_ios,
@@ -163,20 +172,36 @@ class _UpdatePageState extends State<UpdatePage> {
                 ),
               ),
               SizedBox(height: 20),
-              BlocConsumer<AddBloc, AddorUpdateState>(
-                listener: (context, state) {
+              MultiBlocListener(listeners: [
+                BlocListener<AddBloc,AddorUpdateState>(
+                  listener: (context, state) {
                   if (state is AddorUpdateSuccess) {
-                    print("herreee");
-                    Navigator.pop(context);
+                    context.read<HomePageBloc>().add(FetchData());
+                    Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomePage()));
                   } else if (state is AddorUpdateFailure) {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('Failed to add')));
                   }
                 },
+                  ),
+                  BlocListener<UpdateBloc,AddorUpdateState>(
+                  listener: (context, state) {
+                  if (state is AddorUpdateSuccess) {
+                    context.read<HomePageBloc>().add(FetchData());
+                    Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomePage()));
+                  } else if (state is AddorUpdateFailure) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text('Failed to update')));
+                  }
+                },
+                  )
+              ], child: BlocBuilder<AddBloc, AddorUpdateState>(
                 builder: (context, state) {
-    //               if (state is AddorUpdateLoading) {
-    //   return Center(child: CircularProgressIndicator());
-    // }
+                  //   if (state is AddorUpdateLoading) {
+                  //   return Center(child: CircularProgressIndicator());
+                  // }
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(500, 45),
@@ -191,20 +216,37 @@ class _UpdatePageState extends State<UpdatePage> {
                     ),
                   );
                 },
-              ),
+              ),),
+              
               SizedBox(height: 12),
-              OutlinedButton(
-                onPressed: () {
-                  debugPrint('Delete pressed');
+              BlocListener<DeleteBloc, DeleteState>(
+                listener: (context, state) {
+                  if (state is DeleteSuccess) {
+                    context.read<HomePageBloc>().add(FetchData());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('successfully deleted')));
+                  } else if (state is DeleteFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Failed to delete')));
+                  }
                 },
-                style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.red),
-                    minimumSize: Size(500, 45),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4))),
-                child: Text(
-                  'Delete',
-                  style: TextStyle(color: Colors.red),
+                child: OutlinedButton(
+                  onPressed: () {
+                    context
+                        .read<DeleteBloc>()
+                        .add(DeleteData(widget.product!.id));
+                  },
+                  style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.red),
+                      minimumSize: Size(500, 45),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4))),
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
               ),
             ],

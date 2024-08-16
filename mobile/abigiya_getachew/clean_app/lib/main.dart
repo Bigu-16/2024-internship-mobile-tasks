@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:clean_app/core/di.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/add_and_update/add_and_update_bloc.dart';
-import 'package:clean_app/features/ecommerce/presentation/BLoC/add_and_update/add_and_update_event.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_bloc.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_bloc.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_event.dart';
 import 'package:clean_app/features/ecommerce/presentation/pages/home_page.dart';
@@ -23,6 +23,9 @@ Future<void> main() async{
         ),
         BlocProvider<UpdateBloc>(
           create: (BuildContext context) => getIt.get<UpdateBloc>(),
+        ),
+        BlocProvider<DeleteBloc>(
+          create: (BuildContext context) => getIt.get<DeleteBloc>(),
         ),
       ],
       child: Root(),

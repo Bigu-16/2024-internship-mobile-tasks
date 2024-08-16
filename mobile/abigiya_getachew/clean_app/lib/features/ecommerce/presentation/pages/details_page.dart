@@ -1,12 +1,17 @@
 import 'package:clean_app/features/ecommerce/domain/entities/product.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_bloc.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_event.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_state.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_bloc.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_event.dart';
+import 'package:clean_app/features/ecommerce/presentation/pages/home_page.dart';
 import 'package:clean_app/features/ecommerce/presentation/pages/update_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsPage extends StatelessWidget {
   final Product product;
+
   DetailsPage({super.key, required this.product});
   Color color = Colors.white;
   Color textcolor = Colors.black;
@@ -15,7 +20,9 @@ class DetailsPage extends StatelessWidget {
     List<Widget> container = List.generate(
       count,
       (int index) {
-        return SizeCard(index: index,);
+        return SizeCard(
+          index: index,
+        );
       },
     );
     return container;
@@ -35,8 +42,8 @@ class DetailsPage extends StatelessWidget {
                     children: [
                       Container(
                           width: double.infinity,
-                          child:
-                              Image.network(product.imageUrl, fit: BoxFit.fitWidth)),
+                          child: Image.network(product.imageUrl,
+                              fit: BoxFit.fitWidth)),
                       Positioned(
                         top: 20,
                         left: 20,
@@ -67,7 +74,7 @@ class DetailsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Row(
+                      Row(
                         children: [
                           Text(
                             product.category,
@@ -98,8 +105,8 @@ class DetailsPage extends StatelessWidget {
                       const SizedBox(height: 20),
                       const Text(
                         'Size:',
-                        style:
-                            TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 20),
                       ),
                       SizedBox(height: 20),
                       SizedBox(
@@ -110,7 +117,7 @@ class DetailsPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                       Text(
+                      Text(
                         product.description,
                         style: TextStyle(
                           fontSize: 12,
@@ -119,19 +126,39 @@ class DetailsPage extends StatelessWidget {
                       const SizedBox(height: 50),
                       Row(
                         children: [
-                          OutlinedButton(
-                            onPressed: () {
-                              debugPrint('Delete pressed');
+                          BlocListener<DeleteBloc, DeleteState>(
+                            listener: (context, state) {
+                              if (state is DeleteSuccess) {
+                                context.read<HomePageBloc>().add(FetchData());
+                                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomePage()));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text('successfully deleted')));
+                              } else if (state is DeleteFailure) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text('Failed to delete')));
+                              }
                             },
-                            style: OutlinedButton.styleFrom(
-                              side: BorderSide(color: Colors.red),
-                              minimumSize: Size(150, 45),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
-                            ),
-                            child: const Text(
-                              'Delete',
-                              style: TextStyle(color: Colors.red),
+                            child: OutlinedButton(
+                              onPressed: () {
+                                context.read<DeleteBloc>().add(DeleteData(product.id));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()));
+                              },
+                              style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: Colors.red),
+                                minimumSize: Size(150, 45),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4)),
+                              ),
+                              child: const Text(
+                                'Delete',
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
                           ),
                           const Spacer(),
@@ -144,9 +171,11 @@ class DetailsPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(4)),
                             ),
                             onPressed: () {
-                              Navigator.push(context, 
-                              MaterialPageRoute(builder: (context)=> UpdatePage(product: product))
-                              );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          UpdatePage(product: product)));
                             },
                             child: const Text(
                               'Update',
@@ -168,10 +197,7 @@ class DetailsPage extends StatelessWidget {
 }
 
 class SizeCard extends StatefulWidget {
-   SizeCard({
-    super.key,
-   required this.index
-  });
+  SizeCard({super.key, required this.index});
   int index;
 
   @override
@@ -179,18 +205,17 @@ class SizeCard extends StatefulWidget {
 }
 
 class _SizeCardState extends State<SizeCard> {
-  Color color= Colors.white;
+  Color color = Colors.white;
   Color textcolor = Colors.black;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         setState(() {
-          if(color == Colors.white){
+          if (color == Colors.white) {
             color = Color.fromRGBO(63, 81, 243, 1);
             textcolor = Colors.white;
-
-          }else{
+          } else {
             color = Colors.white;
             textcolor = Colors.black;
           }
@@ -210,9 +235,12 @@ class _SizeCardState extends State<SizeCard> {
               )
             ]),
         child: Center(
-          child: Text('${widget.index + 38}',style: TextStyle(
-            color: textcolor,
-          ),),
+          child: Text(
+            '${widget.index + 38}',
+            style: TextStyle(
+              color: textcolor,
+            ),
+          ),
         ),
       ),
     );

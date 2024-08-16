@@ -1,6 +1,6 @@
 abstract class DeleteState{}
 
-class DeleteLoding extends DeleteState{}
+class DeleteLoading extends DeleteState{}
 
 class DeleteSuccess extends DeleteState{
   late final String message;

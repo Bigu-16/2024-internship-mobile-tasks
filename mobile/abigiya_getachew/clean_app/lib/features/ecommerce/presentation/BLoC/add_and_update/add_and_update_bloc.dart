@@ -35,8 +35,9 @@ class AddBloc extends Bloc<AddorUpdateEvent,AddorUpdateState>{
 class UpdateBloc extends Bloc<AddorUpdateEvent,AddorUpdateState>{
   UpdateProduct updateProduct;
 
+
   UpdateBloc({required this.updateProduct}) : super(FetchInitial()){
-    on<UpdateData>((event, emit) async{
+    on<AddData>((event, emit) async{
       try{
         final product = ProductModel(
           id: event.id, 
@@ -48,7 +49,10 @@ class UpdateBloc extends Bloc<AddorUpdateEvent,AddorUpdateState>{
         final result = await updateProduct(product);
         result.fold(
           ((failure)=> emit(AddorUpdateFailure(failure.message))),
-          ((product)=> emit(AddorUpdateSuccess(product))),
+          ((product)=> 
+            emit(AddorUpdateSuccess(product))
+
+            ),
         );
       }catch(e){
       emit(AddorUpdateFailure("Failed to add data"));

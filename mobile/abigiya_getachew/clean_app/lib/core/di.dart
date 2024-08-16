@@ -9,6 +9,7 @@ import 'package:clean_app/features/ecommerce/domain/usecases/get_one_product.dar
 import 'package:clean_app/features/ecommerce/domain/usecases/insert_product.dart';
 import 'package:clean_app/features/ecommerce/domain/usecases/update_product.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/add_and_update/add_and_update_bloc.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_bloc.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -42,4 +43,5 @@ Future<void> setup() async {
   getIt.registerLazySingleton<HomePageBloc>(()=>HomePageBloc(getAllProducts: getIt()));
   getIt.registerLazySingleton<AddBloc>(()=>AddBloc(insertProduct: getIt()));
   getIt.registerLazySingleton<UpdateBloc>(()=>UpdateBloc(updateProduct: getIt()));
+  getIt.registerLazySingleton<DeleteBloc>(()=>DeleteBloc(deleteProduct: getIt()));
 }
