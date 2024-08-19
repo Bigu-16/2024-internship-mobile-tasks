@@ -1,5 +1,7 @@
 import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_bloc.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_state.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/search_bloc/search_bloc.dart';
+import 'package:clean_app/features/ecommerce/presentation/BLoC/search_bloc/search_event.dart';
 import 'package:clean_app/features/ecommerce/presentation/pages/search_page.dart';
 import 'package:clean_app/features/ecommerce/presentation/pages/update_page.dart';
 import 'package:clean_app/features/ecommerce/presentation/widgets/card_builder.dart';
@@ -130,25 +132,10 @@ class _RootPageState extends State<RootPage> {
                             alignment: Alignment
                                 .center, // Center the icon within the button
                             onPressed: () {
-                              Navigator.of(context).push(PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) =>
-                                        const SearchPage(),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  const begin = Offset(1.0, 0.0);
-                                  const end = Offset.zero;
-                                  const curve = Curves.easeInOut;
-                                  var tween = Tween(begin: begin, end: end)
-                                      .chain(CurveTween(curve: curve));
-                                  var offsetAnimation = animation.drive(tween);
-
-                                  return SlideTransition(
-                                    position: offsetAnimation,
-                                    child: child,
-                                  );
-                                },
-                              ));
+                              context.read<SearchBloc>().add(HoldData(state.product));
+                              
+                              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchPage()));
                             },
                             icon: const Icon(
                               Icons.search,

@@ -22,3 +22,7 @@ class DatabaseFailure extends Failure{
 class CacheFailure extends Failure{
   const CacheFailure(String message) : super(message);
 }
+
+class NetworkFailure extends Failure{
+  const NetworkFailure(String message) : super(message);
+}
