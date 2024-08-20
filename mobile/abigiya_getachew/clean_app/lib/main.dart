@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:clean_app/core/di.dart';
 import 'package:clean_app/features/authenticatoin/data/models/user_model.dart';
 import 'package:clean_app/features/authenticatoin/domain/usecases/signUp_usecase.dart';
+import 'package:clean_app/features/authenticatoin/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:clean_app/features/authenticatoin/presentation/bloc/signup_bloc/signup_bloc.dart';
+import 'package:clean_app/features/authenticatoin/presentation/pages/loginPage.dart';
 import 'package:clean_app/features/authenticatoin/presentation/pages/signupPage.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/add_and_update/add_and_update_bloc.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/delete_block/delete_bloc.dart';
@@ -39,6 +41,9 @@ Future<void> main() async{
         BlocProvider(
           create: (BuildContext context) => getIt.get<SignupBloc>(),
         ),
+        BlocProvider(
+          create: (BuildContext context) => getIt.get<LoginBloc>(),
+        ),
       ],
       child: Root(),
     ),
@@ -55,6 +60,6 @@ class Root extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Poppins',
         ),
-        home: const SingUpPage());
+        home: const LoginPage());
   }
 }

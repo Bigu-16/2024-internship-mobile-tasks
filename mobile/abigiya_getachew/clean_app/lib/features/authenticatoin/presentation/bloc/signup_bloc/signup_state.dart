@@ -17,3 +17,4 @@ class SignupFailure extends SignupState{
 
   SignupFailure(this.message);
 }
+

@@ -9,4 +9,3 @@ class SignupRequested extends SignupEvent{
 
   const SignupRequested(this.username,this.email,this.password);
 }
-

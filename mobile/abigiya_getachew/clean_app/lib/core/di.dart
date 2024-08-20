@@ -3,7 +3,9 @@ import 'package:clean_app/features/authenticatoin/data/data_source/local_data_so
 import 'package:clean_app/features/authenticatoin/data/data_source/remote_data_source.dart';
 import 'package:clean_app/features/authenticatoin/data/repository/user_repository_impl.dart';
 import 'package:clean_app/features/authenticatoin/domain/repositories/user_repository.dart';
+import 'package:clean_app/features/authenticatoin/domain/usecases/login_usecase.dart';
 import 'package:clean_app/features/authenticatoin/domain/usecases/signUp_usecase.dart';
+import 'package:clean_app/features/authenticatoin/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:clean_app/features/authenticatoin/presentation/bloc/signup_bloc/signup_bloc.dart';
 import 'package:clean_app/features/ecommerce/data/datasource/local_data_source.dart';
 import 'package:clean_app/features/ecommerce/data/datasource/remote_data_source.dart';
@@ -63,4 +65,6 @@ Future<void> setup() async {
       userLocalDataSource: getIt()));
   getIt.registerLazySingleton<SignupUsecase>(()=>SignupUsecase(getIt()));
   getIt.registerLazySingleton<SignupBloc>(()=>SignupBloc(getIt()));
+  getIt.registerLazySingleton<LoginUsecase>(()=>LoginUsecase(getIt()));
+  getIt.registerLazySingleton<LoginBloc>(()=>LoginBloc(getIt()));
 }

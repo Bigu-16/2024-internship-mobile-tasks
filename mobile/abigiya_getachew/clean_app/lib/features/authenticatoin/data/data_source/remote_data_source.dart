@@ -7,7 +7,7 @@ import 'package:clean_app/features/authenticatoin/domain/entities/user.dart';
 import 'package:http/http.dart' as http;
 
 abstract class UserRemoteDataSource {
-  Future<String> login(String email, password);
+  Future<String> login(String email, String password);
   Future<UserModel> signUp(String userId,username,password);
 }
 
@@ -17,14 +17,18 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   UserRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<String> login(String email, password) async {
-    final response = await client.post(
+  Future<String> login(String email,String password) async {
+    try {
+      final response = await client.post(
       Uri.parse(Urls.userLoginBaseUrl), 
       headers: {'Content-Type' : 'application/json'},
-      body: {
+      body:json.encode( {
       'email': email,
       'password': password,
-    });
+    }));
+
+
+    print(response);
 
     if (response.statusCode == 201) {
       final token = jsonDecode(response.body)['data']['access_token'];
@@ -32,7 +36,12 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       return token;
     }
     else{
+          print(response);
+
       throw ServerException('Login Filed');
+    }
+    } catch(e){
+      throw ServerException(e.toString());
     }
   }
 

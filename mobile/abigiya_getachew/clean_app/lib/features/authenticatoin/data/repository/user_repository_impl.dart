@@ -27,7 +27,7 @@ class UserRepositoryImpl extends UserRepository{
         await userLocalDataSource.cacheToken(token);
         return Right(token);
       } on ServerException{
-        return Left(ServerFailure('Failed to fetch'));
+        return Left(ServerFailure('Failed to fetch user'));
       }
     }else{
       return Left(NetworkFailure('No connection, Please connect to the internet'));
