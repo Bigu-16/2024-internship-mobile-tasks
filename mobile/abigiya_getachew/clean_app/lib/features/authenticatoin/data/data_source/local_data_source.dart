@@ -16,18 +16,28 @@ class UserLocalDataSourceImpl extends UserLocalDataSource{
   
   @override
   Future<void> cacheToken(String token) async{
+    try{
     await sharedPreferences.setString('CACHED_TOKEN', token);
-  }
+  }catch(e){
+    throw ('erroe: $e');
+  }}
   
   
   @override
   Future<String?> getCachedToken() async {
-    return sharedPreferences.getString('CACHED_TOKEN');
+    try{
+      return sharedPreferences.getString('CACHED_TOKEN');
+    }catch(e){
+      throw ('error: $e');
+      }
   }
 
   @override
   Future<void> clearToken() async {
-    await sharedPreferences.remove('CACHED_TOKEN');
+    try{await sharedPreferences.remove('CACHED_TOKEN');
+    }catch(e){
+      throw ('error: $e');
+      }
   }
 
  
