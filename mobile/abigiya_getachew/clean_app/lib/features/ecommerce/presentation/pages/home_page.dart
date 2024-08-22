@@ -31,10 +31,11 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: BlocBuilder<HomePageBloc, HomePageState>(
           builder: (context, state) {
             if (state is FetchLoading) {
-              return (Text('Loading'));
+              return const Center(child: CircularProgressIndicator());
             } else if (state is FetchFailure) {
               return (Text('Failed to fetch'));
             } else if (state is FetchSuccess) {
@@ -68,6 +69,7 @@ class _RootPageState extends State<RootPage> {
                                   'Hello,',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300,
+                                    color: Color.fromARGB(255, 102, 102, 102),
                                   ),
                                 ),
                                 Text(
@@ -97,7 +99,7 @@ class _RootPageState extends State<RootPage> {
                               debugPrint('notification button');
                             },
                             icon: const Icon(
-                              Icons.notifications,
+                              Icons.logout_rounded,
                               size: 25,
                               color: Color.fromARGB(255, 222, 221, 221),
                             ),
@@ -159,7 +161,7 @@ class _RootPageState extends State<RootPage> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-            backgroundColor: Color.fromRGBO(63, 81, 243, 1),
+            backgroundColor: Color.fromARGB(255, 63, 81, 243),
             child: Icon(
               Icons.add,
               color: Colors.white,

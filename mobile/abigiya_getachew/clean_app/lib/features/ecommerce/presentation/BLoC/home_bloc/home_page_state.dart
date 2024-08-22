@@ -13,3 +13,8 @@ class FetchFailure extends HomePageState{
   late final String failure;
   FetchFailure(this.failure);
 }
+
+class LogoutSuccess extends HomePageState{
+  late final String message;
+  LogoutSuccess(this.message);
+}

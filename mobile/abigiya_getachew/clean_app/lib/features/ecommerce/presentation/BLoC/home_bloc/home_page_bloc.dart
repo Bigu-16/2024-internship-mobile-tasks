@@ -1,3 +1,4 @@
+import 'package:clean_app/features/authenticatoin/data/repository/user_repository_impl.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_event.dart';
 import 'package:clean_app/features/ecommerce/presentation/BLoC/home_bloc/home_page_state.dart';
 import 'package:clean_app/features/ecommerce/domain/usecases/get_all_products.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final GetAllProducts getAllProducts;
+
   HomePageBloc({required this.getAllProducts}) : super(FetchLoading()) {
     on<FetchData>((event, emit) async {
       emit(FetchLoading());

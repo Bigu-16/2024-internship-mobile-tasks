@@ -27,7 +27,9 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -35,7 +37,7 @@ class _SearchPageState extends State<SearchPage> {
           },
           icon: Icon(Icons.arrow_back_ios),
           iconSize: 16,
-          color: const Color.fromRGBO(63, 81, 243, 1),
+          color: const Color.fromARGB(255, 63, 81, 243),
         ),
         title: const Text(
           'Search Product',
@@ -75,15 +77,13 @@ class _SearchPageState extends State<SearchPage> {
                             hintText: 'Leather',
                             suffixIcon: IconButton(
                               onPressed: () {
-                                debugPrint('Right arrow  pressed uuuu');
                                 final searchTerm = searchController.text;
-                                // print(widget.allProduct);
                                 context.read<SearchBloc>().add(FilterApplied(
                                       searchTerm, allProduct
                                     ));
                               },
                               icon: Icon(Icons.arrow_right_alt),
-                              color: const Color.fromRGBO(63, 81, 243, 1),
+                              color: const Color.fromARGB(255, 63, 81, 243),
                             )),
                       );
                     },
@@ -101,7 +101,7 @@ class _SearchPageState extends State<SearchPage> {
                     height: 40,
                     width: 40,
                     decoration: BoxDecoration(
-                      color: Color.fromRGBO(63, 81, 243, 1),
+                      color: Color.fromARGB(255, 63, 81, 243),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Icon(Icons.filter_list, color: Colors.white),
@@ -128,16 +128,9 @@ class _SearchPageState extends State<SearchPage> {
                   } else {
                     return Container();
                   }
-                  //  else if (state is SearchSuccess) {
-                  //   print(state.filteredProducts);
-                  //   return (CardBuilder(products: state.filteredProducts));
-                  // }
                 },
               ),
 
-              // ListView(
-              //     padding: const EdgeInsets.all(8),
-              //     children: CardBuilder(products: widget.product)),
             ),
           ],
         ),

@@ -14,9 +14,16 @@ class SplashScreen extends StatelessWidget {
     });
 
     myColor = Color.fromARGB(255, 63, 81, 243);
+    Color lighterColor = myColor.withOpacity(0.2);
+
     return Container(
         decoration: BoxDecoration(
-          color: myColor,
+          // color: myColor,
+          gradient: LinearGradient(
+          colors: [lighterColor, myColor], // Lighter color at the top, myColor at the bottom
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
           image: DecorationImage(
               image: AssetImage('image/splash_screen.png'),
               fit: BoxFit.cover,

@@ -22,65 +22,82 @@ class _BottomSelectState extends State<BottomSelect> {
 
   @override
   Widget build(BuildContext context) {
-    RangeValues range = const RangeValues(15, 85);
-    return Container(
-      height: 250,
-      child: Padding(
+    double min_val = 15;
+    double max_val = 85;
+    // RangeValues range = RangeValues(15, 85);
+    // final viewInsets = MediaQuery.of(context).viewInsets;
+
+    return 
+    // Container(
+    //   height: 250,
+      // child: 
+      Padding(
         padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Name'),
-            Container(
-              height: 40,
-              width: 350,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 232, 232, 232),
+        // padding: EdgeInsets.fromLTRB(20,20,20,viewInsets.bottom + 20),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Category'),
+              Container(
+                height: 40,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 232, 232, 232),
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10),
                   ),
-                  borderRadius: BorderRadius.circular(10)),
-              child: const TextField(
-                decoration: InputDecoration(
-                  border: InputBorder.none,
                 ),
               ),
-            ),
-            Text('Price'),
-            RangeSlider(
-              values: range,
-              max: 100,
-              min: 0,
-              onChanged: (RangeValues val) {
-                setState(() {
-                  range = val;
-                });
-              },
-              activeColor: Color.fromRGBO(63, 81, 243, 1),
-              inactiveColor: Color.fromARGB(255, 232, 232, 232),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(500, 45),
-                backgroundColor: const Color.fromRGBO(63, 81, 243, 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4)),
+
+              SizedBox(height: 10),
+              Text('Price'),
+              RangeSlider(
+                values: RangeValues(min_val, max_val),
+                max: 100,
+                min: 0,
+                divisions: 5,
+                onChanged: (val) {
+                  setState(() {
+                    min_val = val.start;
+                    max_val = val.end;
+                  });
+                },
+                activeColor: Color.fromARGB(255, 63, 81, 243),
+                inactiveColor: Color.fromARGB(255, 217, 217, 217),
               ),
-              onPressed: () {
-                // final searchTerm = searchController.text;
-                // print(widget.allProduct);
-                // context
-                //     .read<SearchBloc>()
-                //     .add(FilterApplied(searchTerm, widget.allProduct));
-              },
-              child: const Text(
-                'APPLY',
-                style: TextStyle(color: Colors.white),
+              SizedBox(height: 10),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(double.infinity, 45),
+                  backgroundColor: const Color.fromARGB(255, 63, 81, 243),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                ),
+                onPressed: () {
+                  // final searchTerm = searchController.text;
+                  // print(widget.allProduct);
+                  // context
+                  //     .read<SearchBloc>()
+                  //     .add(FilterApplied(searchTerm, widget.allProduct));
+                },
+                child: const Text(
+                  'APPLY',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    // );
   }
 }

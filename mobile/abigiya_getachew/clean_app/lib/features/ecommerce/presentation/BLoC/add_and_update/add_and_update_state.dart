@@ -4,6 +4,8 @@ abstract class AddorUpdateState{}
 
 class FetchInitial extends AddorUpdateState{}
 
+class AddorUpdateLoading extends AddorUpdateState{}
+
 class AddorUpdateSuccess extends AddorUpdateState{
   late final Product product;
   AddorUpdateSuccess(this.product);

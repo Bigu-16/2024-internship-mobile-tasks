@@ -32,6 +32,7 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Flexible(
             child: Column(
@@ -60,7 +61,7 @@ class DetailsPage extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.arrow_back_ios_new,
-                              color: Color.fromRGBO(63, 81, 243, 1),
+                              color: Color.fromARGB(255, 63, 81, 243),
                               size: 15,
                             ),
                           ),
@@ -166,7 +167,7 @@ class DetailsPage extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               minimumSize: Size(150, 45),
                               backgroundColor:
-                                  const Color.fromRGBO(63, 81, 243, 1),
+                                  const Color.fromARGB(255, 63, 81, 243),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),
                             ),
@@ -213,7 +214,7 @@ class _SizeCardState extends State<SizeCard> {
       onTap: () {
         setState(() {
           if (color == Colors.white) {
-            color = Color.fromRGBO(63, 81, 243, 1);
+            color = Color.fromARGB(255, 63, 81, 243);
             textcolor = Colors.white;
           } else {
             color = Colors.white;
